@@ -1,0 +1,20 @@
+name: RGInf
+main: moe.reinwd.inf.InfExtentionPlugin
+description: "RPGItems' inf extention"
+version: ${version}
+depend: [RPGItems,InfiniteInfernal]
+authors: [ReinWD]
+website: "https://github.com/NyaaCat/RPGItems-reloaded"
+database: false
+api-version: 1.13
+
+commands:
+  rpgitem-inf:
+    description: RPGItems' Infinite infernal extention
+    permission: rpgitem
+    permission-message: "You do not have the required permission: <permission>"
+    usage: "/<command> [SubCommand...] [Arguments...] or /<command> help"
+
+permissions:
+  rpgitem.inf:
+    default: op
