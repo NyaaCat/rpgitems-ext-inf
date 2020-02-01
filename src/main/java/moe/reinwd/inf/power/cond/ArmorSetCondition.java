@@ -36,19 +36,19 @@ public class ArmorSetCondition extends InfCondition<Void> {
     private boolean checkChestPlate(Player player) {
         Optional<RPGItem> rpgItem = ItemManager.toRPGItem(player.getInventory().getChestplate());
         Set<RPGItem> items = ItemManager.getItems(chestplate);
-        return helmet.equals("") || rpgItem.isPresent() && items.contains(rpgItem.get());
+        return chestplate.equals("") || rpgItem.isPresent() && items.contains(rpgItem.get());
     }
 
     private boolean checkLegging(Player player) {
         Optional<RPGItem> rpgItem = ItemManager.toRPGItem(player.getInventory().getLeggings());
         Set<RPGItem> items = ItemManager.getItems(legging);
-        return helmet.equals("") || rpgItem.isPresent() && items.contains(rpgItem.get());
+        return legging.equals("") || rpgItem.isPresent() && items.contains(rpgItem.get());
     }
 
     private boolean checkBoots(Player player) {
         Optional<RPGItem> rpgItem = ItemManager.toRPGItem(player.getInventory().getBoots());
         Set<RPGItem> items = ItemManager.getItems(boots);
-        return helmet.equals("") || rpgItem.isPresent() && items.contains(rpgItem.get());
+        return boots.equals("") || rpgItem.isPresent() && items.contains(rpgItem.get());
     }
     @Override
     public String getName() {
