@@ -4,6 +4,7 @@ import cat.nyaa.infiniteinfernal.InfPlugin;
 import cat.nyaa.infiniteinfernal.api.InfVarApi;
 import cat.nyaa.infiniteinfernal.ui.impl.VarRage;
 import moe.reinwd.inf.InfExtentionPlugin;
+import moe.reinwd.inf.utils.Utils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -134,16 +135,9 @@ public class Rage extends BasePower {
             if (plugin.isEnabled()){
                 InfVarApi varApi = plugin.getVarApi();
                 VarRage rage = varApi.getRage(player);
-                rage.drop(- damageFunc(damage), varApi.getTick());
+                rage.drop(Utils.damageFunc(damage, 1, rage), varApi.getTick());
             }
             return PowerResult.ok();
-        }
-
-        private double damageFunc(double damage) {
-            if (damage < 0) return 0;
-            double x = damage + 1;
-            double log = Math.log(x);
-            return 6 * log * damageFactor;
         }
 
         private PowerResult<Void> costRage(Player player, ItemStack stack) {
@@ -151,7 +145,7 @@ public class Rage extends BasePower {
             if (plugin.isEnabled()){
                 InfVarApi varApi = plugin.getVarApi();
                 VarRage rage = varApi.getRage(player);
-                rage.drop(-getUseRage(), varApi.getTick());
+                rage.drop(getUseRage(), varApi.getTick());
             }
             return PowerResult.ok();
         }

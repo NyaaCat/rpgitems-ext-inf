@@ -4,11 +4,9 @@ import think.rpgitems.power.Meta;
 import think.rpgitems.power.Property;
 
 @Meta(marker = true)
-public class ManaMax extends ConditionedMarker {
+public class ManaMax extends ConditionedMarker<Double> {
     @Property
     public double mana = 10;
-
-
 
     @Override
     public String displayText() {
@@ -18,5 +16,10 @@ public class ManaMax extends ConditionedMarker {
     @Override
     public String getName() {
         return "mana_max";
+    }
+
+    @Override
+    public Double getValue() {
+        return mana;
     }
 }

@@ -4,7 +4,7 @@ import think.rpgitems.power.Meta;
 import think.rpgitems.power.Property;;
 
 @Meta(marker = true)
-public class RageMax extends ConditionedMarker {
+public class RageMax extends ConditionedMarker<Double> {
     @Property
     public double rage = 10;
 
@@ -16,5 +16,10 @@ public class RageMax extends ConditionedMarker {
     @Override
     public String getName() {
         return "rage_max";
+    }
+
+    @Override
+    public Double getValue() {
+        return rage;
     }
 }

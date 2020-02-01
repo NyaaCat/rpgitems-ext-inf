@@ -6,9 +6,10 @@ import think.rpgitems.power.Property;
 import think.rpgitems.power.marker.BaseMarker;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-public abstract class ConditionedMarker extends BaseMarker {
+public abstract class ConditionedMarker<T> extends BaseMarker {
     @Property
     Set<String> conditions = new HashSet<>();
 
@@ -16,4 +17,10 @@ public abstract class ConditionedMarker extends BaseMarker {
     public NamespacedKey getNamespacedKey() {
         return new NamespacedKey(InfExtentionPlugin.plugin, getName());
     }
+
+    public Set<String> getConditions() {
+        return conditions;
+    }
+
+    public abstract T getValue();
 }

@@ -15,35 +15,11 @@ import java.util.Map;
 
 @Meta(marker = true)
 public class RageMaxCondition extends InfCondition<Double> {
-    @Property(required = true)
-    public String id;
-
     @Property
     public double maxRage = 0;
 
     @Property
     public boolean checkBase = false;
-
-    @Property
-    public boolean isStatic = false;
-
-    @Property
-    public boolean isCritical = false;
-
-    @Override
-    public String id() {
-        return id;
-    }
-
-    @Override
-    public boolean isStatic() {
-        return isStatic;
-    }
-
-    @Override
-    public boolean isCritical() {
-        return isCritical;
-    }
 
     @Override
     public PowerResult<Double> check(Player player, ItemStack stack, Map<PropertyHolder, PowerResult<?>> context) {
