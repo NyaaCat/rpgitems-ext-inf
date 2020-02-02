@@ -30,13 +30,13 @@ public class ManaMaxCondition extends InfCondition<Double> {
             Double maxValue = mana.getMaxValue();
 
             if (checkBase){
-                if (baseMax >= this.maxMana) {
+                if (baseMax <= this.maxMana) {
                     return PowerResult.ok(baseMax);
                 } else {
                     return PowerResult.fail(baseMax);
                 }
             }else {
-                if (maxValue >= this.maxMana) {
+                if (maxValue <= this.maxMana) {
                     return PowerResult.ok(maxValue);
                 } else {
                     return PowerResult.fail(maxValue);

@@ -31,13 +31,13 @@ public class RageMaxCondition extends InfCondition<Double> {
             Double maxValue = rage.getMaxValue();
 
             if (checkBase){
-                if (baseMax >= this.maxRage) {
+                if (baseMax <= this.maxRage) {
                     return PowerResult.ok(baseMax);
                 } else {
                     return PowerResult.fail(baseMax);
                 }
             }else {
-                if (maxValue >= this.maxRage) {
+                if (maxValue <= this.maxRage) {
                     return PowerResult.ok(maxValue);
                 } else {
                     return PowerResult.fail(maxValue);
