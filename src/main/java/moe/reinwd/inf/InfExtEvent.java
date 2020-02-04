@@ -10,12 +10,15 @@ import moe.reinwd.inf.power.ConditionChecker;
 import moe.reinwd.inf.power.marker.ConditionedMarker;
 import moe.reinwd.inf.power.marker.ManaMax;
 import moe.reinwd.inf.power.marker.RageMax;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
 import think.rpgitems.item.ItemManager;
 import think.rpgitems.item.RPGItem;
@@ -82,10 +85,17 @@ public class InfExtEvent implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onDamage(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player)) {
+        Entity damager1 = event.getDamager();
+        if (damager1 instanceof Projectile){
+            ProjectileSource shooter = ((Projectile) damager1).getShooter();
+            if (shooter instanceof Player){
+                damager1 = (Entity) shooter;
+            }
+        }
+        if (!(damager1 instanceof Player)) {
             return;
         }
-        Player damager = (Player) event.getDamager();
+        Player damager = (Player) damager1;
         InfPlugin plugin = InfExtentionPlugin.getPlugin(InfPlugin.class);
         if (plugin.isEnabled()) {
             InfVarApi varApi = plugin.getVarApi();
