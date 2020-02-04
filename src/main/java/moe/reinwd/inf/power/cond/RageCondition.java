@@ -3,6 +3,7 @@ package moe.reinwd.inf.power.cond;
 import cat.nyaa.infiniteinfernal.InfPlugin;
 import cat.nyaa.infiniteinfernal.api.InfVarApi;
 import cat.nyaa.infiniteinfernal.ui.impl.VarMana;
+import cat.nyaa.infiniteinfernal.ui.impl.VarRage;
 import moe.reinwd.inf.InfExtentionPlugin;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -20,8 +21,8 @@ public class RageCondition extends InfCondition<Double> {
         InfPlugin plugin = InfExtentionPlugin.getPlugin(InfPlugin.class);
         if (plugin.isEnabled()) {
             InfVarApi varApi = plugin.getVarApi();
-            VarMana mana = varApi.getMana(player);
-            Double value = mana.getValue();
+            VarRage rage = varApi.getRage(player);
+            Double value = rage.getValue();
             if (value >= this.rage) {
                 return PowerResult.ok(value);
             } else {

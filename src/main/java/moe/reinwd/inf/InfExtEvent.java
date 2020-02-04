@@ -16,6 +16,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 import think.rpgitems.item.ItemManager;
 import think.rpgitems.item.RPGItem;
 import think.rpgitems.power.Condition;
@@ -89,8 +90,17 @@ public class InfExtEvent implements Listener {
         if (plugin.isEnabled()) {
             InfVarApi varApi = plugin.getVarApi();
             VarRage rage = varApi.getRage(damager);
-            double damage = event.getFinalDamage();
-            rage.drop(- Utils.damageFunc(damage, 1, rage), varApi.getTick());
+            int lastDrop = rage.getLastDrop();
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    if (varApi.getTick() - lastDrop < 40){
+                        return;
+                    }
+                    double damage = event.getFinalDamage();
+                    rage.drop(-Utils.damageFunc(damage, 1, rage), varApi.getTick());
+                }
+            }.runTaskLater(InfExtentionPlugin.plugin, 1);
         }
     }
 
