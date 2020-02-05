@@ -108,7 +108,7 @@ public class InfExtEvent implements Listener {
                         return;
                     }
                     double damage = event.getFinalDamage();
-                    rage.drop(-Utils.damageFunc(damage, 1, rage), varApi.getTick());
+                    rage.drop(-Utils.damageFunc(damage, 1, rage, damage * 0.01), varApi.getTick());
                 }
             }.runTaskLater(InfExtentionPlugin.plugin, 1);
         }

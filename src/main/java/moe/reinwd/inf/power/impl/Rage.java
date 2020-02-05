@@ -107,7 +107,7 @@ public class Rage extends BasePower {
             if (!isRequireHurtByEntity() || event instanceof EntityDamageByEntityEvent) {
                 return rageByDamage(target, stack, damage).with(damage);
             }
-            return PowerResult.noop();
+            return rageByDamage(target, stack, event.getDamage()).with(damage);
         }
 
         @Override
@@ -115,7 +115,7 @@ public class Rage extends BasePower {
             if (!isRequireHurtByEntity() || event instanceof EntityDamageByEntityEvent) {
                 return rageByDamage(target, stack, event.getDamage());
             }
-            return PowerResult.noop();
+            return rageByDamage(target, stack, event.getDamage());
         }
 
         @Override
@@ -135,7 +135,7 @@ public class Rage extends BasePower {
             if (plugin.isEnabled()){
                 InfVarApi varApi = plugin.getVarApi();
                 VarRage rage = varApi.getRage(player);
-                rage.drop(Utils.damageFunc(damage, 1, rage), varApi.getTick());
+                rage.drop(Utils.damageFunc(damage, 1, rage, - Double.MAX_VALUE), varApi.getTick());
             }
             return PowerResult.ok();
         }
