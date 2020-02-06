@@ -135,7 +135,7 @@ public class Rage extends BasePower {
             if (plugin.isEnabled()){
                 InfVarApi varApi = plugin.getVarApi();
                 VarRage rage = varApi.getRage(player);
-                rage.drop(Utils.damageFunc(damage, 1, rage, - Double.MAX_VALUE), varApi.getTick());
+                rage.drop(Utils.damageFunc(damage, damageFactor, rage, - Double.MAX_VALUE), varApi.getTick());
             }
             return PowerResult.ok();
         }
