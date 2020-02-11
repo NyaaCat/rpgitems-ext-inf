@@ -105,17 +105,17 @@ public class Rage extends BasePower {
         @Override
         public PowerResult<Double> takeHit(Player target, ItemStack stack, double damage, EntityDamageEvent event) {
             if (!isRequireHurtByEntity() || event instanceof EntityDamageByEntityEvent) {
-                return rageByDamage(target, stack, damage).with(damage);
+                return rageByDamage(target, stack, event.getFinalDamage()).with(damage);
             }
-            return rageByDamage(target, stack, event.getDamage()).with(damage);
+            return rageByDamage(target, stack, event.getFinalDamage()).with(damage);
         }
 
         @Override
         public PowerResult<Void> hurt(Player target, ItemStack stack, EntityDamageEvent event) {
             if (!isRequireHurtByEntity() || event instanceof EntityDamageByEntityEvent) {
-                return rageByDamage(target, stack, event.getDamage());
+                return rageByDamage(target, stack, event.getFinalDamage());
             }
-            return rageByDamage(target, stack, event.getDamage());
+            return rageByDamage(target, stack, event.getFinalDamage());
         }
 
         @Override
@@ -135,7 +135,7 @@ public class Rage extends BasePower {
             if (plugin.isEnabled()){
                 InfVarApi varApi = plugin.getVarApi();
                 VarRage rage = varApi.getRage(player);
-                rage.drop(Utils.damageFunc(damage, damageFactor, rage, - Double.MAX_VALUE), varApi.getTick());
+                rage.drop(Utils.damageFunc(damage, getDamageFactor(), rage, - Double.MAX_VALUE), varApi.getTick());
             }
             return PowerResult.ok();
         }
