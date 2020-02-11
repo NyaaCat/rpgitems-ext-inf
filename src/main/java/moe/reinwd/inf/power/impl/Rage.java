@@ -91,7 +91,7 @@ public class Rage extends BasePower {
         return "rage";
     }
 
-    public class Impl implements PowerPlain, PowerRightClick, PowerLeftClick, PowerSneak, PowerSneaking, PowerSprint, PowerBowShoot, PowerHitTaken, PowerHit, PowerHurt {
+    public class Impl implements PowerPlain, PowerRightClick, PowerLeftClick, PowerSneak, PowerSneaking, PowerSprint, PowerBowShoot, PowerHitTaken, PowerHit, PowerHurt, PowerTick {
         @Override
         public PowerResult<Float> bowShoot(Player player, ItemStack stack, EntityShootBowEvent event) {
             return fire(player, stack).with(event.getForce());
@@ -173,6 +173,11 @@ public class Rage extends BasePower {
         @Override
         public Power getPower() {
             return Rage.this;
+        }
+
+        @Override
+        public PowerResult<Void> tick(Player player, ItemStack stack) {
+            return fire(player, stack);
         }
     }
 }
