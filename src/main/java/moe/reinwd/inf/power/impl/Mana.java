@@ -127,10 +127,6 @@ public class Mana extends BasePower{
             return PowerResult.ok();
         }
 
-        public int getCost() {
-            return cost;
-        }
-
         public long getCooldown() {
             return cooldown;
         }
