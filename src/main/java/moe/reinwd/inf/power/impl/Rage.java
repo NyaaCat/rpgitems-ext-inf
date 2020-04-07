@@ -29,10 +29,6 @@ public class Rage extends BasePower {
         this.useRage = useRage;
     }
 
-    public void setDamageFactor(double damageFactor) {
-        this.damageFactor = damageFactor;
-    }
-
     public void setCost(int cost) {
         this.cost = cost;
     }
@@ -43,10 +39,6 @@ public class Rage extends BasePower {
 
     public void setRequireHurtByEntity(boolean requireHurtByEntity) {
         this.requireHurtByEntity = requireHurtByEntity;
-    }
-
-    public double getDamageFactor() {
-        return damageFactor;
     }
 
     public int getCost() {
@@ -63,9 +55,6 @@ public class Rage extends BasePower {
 
     @Property
     public double useRage = 0;
-
-    @Property
-    public double damageFactor = 1;
 
     /**
      * Cost of this power
@@ -99,23 +88,23 @@ public class Rage extends BasePower {
 
         @Override
         public PowerResult<Double> hit(Player player, ItemStack stack, LivingEntity entity, double damage, EntityDamageByEntityEvent event) {
-            return rageByDamage(player, stack, damage).with(damage);
+            return fire(player, stack).with(damage);
         }
 
         @Override
         public PowerResult<Double> takeHit(Player target, ItemStack stack, double damage, EntityDamageEvent event) {
             if (!isRequireHurtByEntity() || event instanceof EntityDamageByEntityEvent) {
-                return rageByDamage(target, stack, event.getFinalDamage()).with(damage);
+                return fire(target, stack).with(damage);
             }
-            return rageByDamage(target, stack, event.getFinalDamage()).with(damage);
+            return fire(target, stack).with(damage);
         }
 
         @Override
         public PowerResult<Void> hurt(Player target, ItemStack stack, EntityDamageEvent event) {
             if (!isRequireHurtByEntity() || event instanceof EntityDamageByEntityEvent) {
-                return rageByDamage(target, stack, event.getFinalDamage());
+                return fire(target, stack);
             }
-            return rageByDamage(target, stack, event.getFinalDamage());
+            return fire(target, stack);
         }
 
         @Override
@@ -128,16 +117,6 @@ public class Rage extends BasePower {
             if (!checkCooldown(getPower(), player, getCooldown(), true, true)) return PowerResult.cd();
             if (!getItem().consumeDurability(stack, getCost())) return PowerResult.cost();
             return costRage(player, stack);
-        }
-
-        private PowerResult<Void> rageByDamage(Player player, ItemStack stack, double damage){
-            InfPlugin plugin = InfExtentionPlugin.getPlugin(InfPlugin.class);
-            if (plugin.isEnabled()){
-                InfVarApi varApi = plugin.getVarApi();
-                VarRage rage = varApi.getRage(player);
-                rage.drop(Utils.damageFunc(damage, getDamageFactor(), rage, - Double.MAX_VALUE), varApi.getTick());
-            }
-            return PowerResult.ok();
         }
 
         private PowerResult<Void> costRage(Player player, ItemStack stack) {
