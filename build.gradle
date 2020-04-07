@@ -29,10 +29,10 @@ String buildNumber = System.getenv("BUILD_NUMBER") == null ? "686936"           
 version = "$majorVersion.$minorVersion-$buildNumber"
 
 dependencies {
-    compileOnly(files('lib/InfiniteInfernal-1.0-SNAPSHOT.jar'))
     compileOnly('cat.nyaa:nyaacore:7.1-SNAPSHOT')
     compileOnly('cat.nyaa:rpgitems:3.8-SNAPSHOT')
     compileOnly("org.spigotmc:spigot-api:$minecraftVersion-R0.1-SNAPSHOT")
+    compileOnly("cat.nyaa:infiniteinfernal:1.1-SNAPSHOT")
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
