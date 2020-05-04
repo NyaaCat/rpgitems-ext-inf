@@ -83,7 +83,7 @@ public class InfExtEvent implements Listener {
         event.setBonus(bonus);
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onDamage(EntityDamageByEntityEvent event) {
         Entity damager1 = event.getDamager();
         if (damager1 instanceof Projectile){
