@@ -4,6 +4,7 @@ import cat.nyaa.infiniteinfernal.InfPlugin;
 import cat.nyaa.infiniteinfernal.api.InfVarApi;
 import cat.nyaa.infiniteinfernal.ui.impl.VarMana;
 import moe.reinwd.inf.InfExtentionPlugin;
+import moe.reinwd.inf.power.BasePluginPower;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -18,7 +19,7 @@ import think.rpgitems.power.*;
 import static think.rpgitems.power.Utils.checkCooldown;
 
 @Meta(defaultTrigger = "RIGHT_CLICK", generalInterface = PowerPlain.class, implClass = Mana.Impl.class)
-public class Mana extends BasePower{
+public class Mana extends BasePluginPower {
     public void setUseMana(double useMana) {
         this.useMana = useMana;
     }
